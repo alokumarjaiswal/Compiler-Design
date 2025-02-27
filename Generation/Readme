@@ -1,0 +1,7 @@
+Code Optimization
+
+Output: intermediate code, optimized intermediate code, generated target code
+
+Steps to compile & run :
+1. gcc -o optimizer main.c intermediate_code.c optimizer.c codegen.c
+2. ./optimizer
