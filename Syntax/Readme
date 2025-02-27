@@ -11,6 +11,6 @@ The errors identified are in the grammar of the following constructs:
 
 Steps to Compile & Run
 1. lex parser.l
-2. yacc parser.y
-3. gcc y.tab.c -ll -ly -w
+2. bison -y -Wno-yacc -d parser.y
+3. gcc y.tab.c -ll -w
 4 ./a.out test.c
