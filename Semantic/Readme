@@ -9,5 +9,5 @@ The checking includes displaying the following errors :
 Steps to run :
 1. lex s_parser.l
 2. yacc s_parser.y
-3. gcc y.tab.c -ll -ly -w
+3. gcc y.tab.c -ll -w
 4. ./a.out test1.c

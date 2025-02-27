@@ -3,156 +3,156 @@
 	#include <stdlib.h>
 	#include "s_symbol.c"
 	int g_addr = 100;
-int i=1,lnum1=0,label1[20],ltop1;
-int stack[100],index1=0,end[100],arr[10],gl1,gl2,ct,c,b,fl,top=0,label[20],lnum=0,ltop=0;
-char st1[100][10];
-char i_[2]="0";
-char temp[2]="t";
-char null[2]=" ";
-void yyerror(char *s);
-int printline();
-void open1()
-{
-	stack[index1]=i;
-	i++;
-	index1++;
-	return;
-}
-void close1()
-{
-	index1--;
-	end[stack[index1]]=1;
-	stack[index1]=0;
-	return;
-}
-void if1()
-{
-	lnum++;
-	strcpy(temp,"t");
-	strcat(temp,i_);
-	printf("%s = not %s\n",temp,st1[top]);
- 	printf("if %s goto L%d\n",temp,lnum);
-	i_[0]++;
-	label[++ltop]=lnum;	
-	
-}
-void if2()
-{
-	lnum++;
-	printf("goto L%d\n",lnum);
-	printf("L%d: \n",label[ltop--]);
-	label[++ltop]=lnum;
-}
-void if3()
-{
-	printf("L%d:\n",label[ltop--]);
-}
-void w1()
-{
-	lnum++;
-	label[++ltop]=lnum;
-	printf("L%d:\n",lnum);
-}
-void w2()
-{
-	lnum++;
-	strcpy(temp,"t");
-	strcat(temp,i_);
-	printf("%s = not %s\n",temp,st1[top--]);
- 	printf("if %s goto L%d\n",temp,lnum);
-	i_[0]++;
-	label[++ltop]=lnum;
-}
-void w3()
-{
-	int y=label[ltop--];
-	printf("goto L%d\n",label[ltop--]);
-	printf("L%d:\n",y);
-}
-void dw1()
-{
-	lnum++;
-	label[++ltop]=lnum;
-	printf("L%d:\n",lnum);
-}
-void dw2()
-{
- 	printf("if %s goto L%d\n",st1[top--],label[ltop--]);
-}
-void f1()
-{
-	lnum++;
-	label[++ltop]=lnum;
-	printf("L%d:\n",lnum);
-}
-void f2()
-{
-	lnum++;
-	strcpy(temp,"t");
-	strcat(temp,i_);
-	printf("%s = not %s\n",temp,st1[top--]);
- 	printf("if %s goto L%d\n",temp,lnum);
-	i_[0]++;
-	label[++ltop]=lnum;
-	lnum++;
-	printf("goto L%d\n",lnum);
-	label[++ltop]=lnum;
-	lnum++;
-	printf("L%d:\n",lnum);	
-	label[++ltop]=lnum;
-}
-void f3()
-{
-	printf("goto L%d\n",label[ltop-3]);
-	printf("L%d:\n",label[ltop-1]);
-}
-void f4()
-{
-	printf("goto L%d\n",label[ltop]);
-	printf("L%d:\n",label[ltop-2]);
-	ltop-=4;
-}
-void push(char *a)
-{
-	strcpy(st1[++top],a);
-}
-void array1()
-{
-	strcpy(temp,"t");
-	strcat(temp,i_);
-	printf("%s = %s * 4\n",temp,st1[top]);
-	strcpy(st1[top],temp);
-	i_[0]++;
-	strcpy(temp,"t");
-	strcat(temp,i_);
-	printf("%s = %s [ %s ] \n",temp,st1[top-1],st1[top]);
-	top--;
-	strcpy(st1[top],temp);
-	i_[0]++;	
-}
-void codegen()
-{
-	strcpy(temp,"t");
-	strcat(temp,i_);
-	printf("%s = %s %s %s\n",temp,st1[top-2],st1[top-1],st1[top]);
-	top-=2;
-	strcpy(st1[top],temp);
-	i_[0]++;
-}
-void codegen_umin()
-{
-	strcpy(temp,"t");
-	strcat(temp,i_);
-	printf("%s = -%s\n",temp,st1[top]);
-	top--;
-	strcpy(st1[top],temp);
-	i_[0]++;
-}
-void codegen_assign()
-{
-	printf("%s = %s\n",st1[top-2],st1[top]);
-	top-=2;
-}
+	int i=1,lnum1=0,label1[20],ltop1;
+	int stack[100],index1=0,end[100],arr[10],gl1,gl2,ct,c,b,fl,top=0,label[20],lnum=0,ltop=0;
+	char st1[100][10];
+	char i_[2]="0";
+	char temp[2]="t";
+	char null[2]=" ";
+	void yyerror(char *s);
+	int printline();
+	void open1()
+	{
+		stack[index1]=i;
+		i++;
+		index1++;
+		return;
+	}
+	void close1()
+	{
+		index1--;
+		end[stack[index1]]=1;
+		stack[index1]=0;
+		return;
+	}
+	void if1()
+	{
+		lnum++;
+		strcpy(temp,"t");
+		strcat(temp,i_);
+		printf("%s = not %s\n",temp,st1[top]);
+		printf("if %s goto L%d\n",temp,lnum);
+		i_[0]++;
+		label[++ltop]=lnum;	
+		
+	}
+	void if2()
+	{
+		lnum++;
+		printf("goto L%d\n",lnum);
+		printf("L%d: \n",label[ltop--]);
+		label[++ltop]=lnum;
+	}
+	void if3()
+	{
+		printf("L%d:\n",label[ltop--]);
+	}
+	void w1()
+	{
+		lnum++;
+		label[++ltop]=lnum;
+		printf("L%d:\n",lnum);
+	}
+	void w2()
+	{
+		lnum++;
+		strcpy(temp,"t");
+		strcat(temp,i_);
+		printf("%s = not %s\n",temp,st1[top--]);
+		printf("if %s goto L%d\n",temp,lnum);
+		i_[0]++;
+		label[++ltop]=lnum;
+	}
+	void w3()
+	{
+		int y=label[ltop--];
+		printf("goto L%d\n",label[ltop--]);
+		printf("L%d:\n",y);
+	}
+	void dw1()
+	{
+		lnum++;
+		label[++ltop]=lnum;
+		printf("L%d:\n",lnum);
+	}
+	void dw2()
+	{
+		printf("if %s goto L%d\n",st1[top--],label[ltop--]);
+	}
+	void f1()
+	{
+		lnum++;
+		label[++ltop]=lnum;
+		printf("L%d:\n",lnum);
+	}
+	void f2()
+	{
+		lnum++;
+		strcpy(temp,"t");
+		strcat(temp,i_);
+		printf("%s = not %s\n",temp,st1[top--]);
+		printf("if %s goto L%d\n",temp,lnum);
+		i_[0]++;
+		label[++ltop]=lnum;
+		lnum++;
+		printf("goto L%d\n",lnum);
+		label[++ltop]=lnum;
+		lnum++;
+		printf("L%d:\n",lnum);	
+		label[++ltop]=lnum;
+	}
+	void f3()
+	{
+		printf("goto L%d\n",label[ltop-3]);
+		printf("L%d:\n",label[ltop-1]);
+	}
+	void f4()
+	{
+		printf("goto L%d\n",label[ltop]);
+		printf("L%d:\n",label[ltop-2]);
+		ltop-=4;
+	}
+	void push(char *a)
+	{
+		strcpy(st1[++top],a);
+	}
+	void array1()
+	{
+		strcpy(temp,"t");
+		strcat(temp,i_);
+		printf("%s = %s * 4\n",temp,st1[top]);
+		strcpy(st1[top],temp);
+		i_[0]++;
+		strcpy(temp,"t");
+		strcat(temp,i_);
+		printf("%s = %s [ %s ] \n",temp,st1[top-1],st1[top]);
+		top--;
+		strcpy(st1[top],temp);
+		i_[0]++;	
+	}
+	void codegen()
+	{
+		strcpy(temp,"t");
+		strcat(temp,i_);
+		printf("%s = %s %s %s\n",temp,st1[top-2],st1[top-1],st1[top]);
+		top-=2;
+		strcpy(st1[top],temp);
+		i_[0]++;
+	}
+	void codegen_umin()
+	{
+		strcpy(temp,"t");
+		strcat(temp,i_);
+		printf("%s = -%s\n",temp,st1[top]);
+		top--;
+		strcpy(st1[top],temp);
+		i_[0]++;
+	}
+	void codegen_assign()
+	{
+		printf("%s = %s\n",st1[top-2],st1[top]);
+		top-=2;
+	}
 
 
 %}
@@ -164,7 +164,7 @@ void codegen_assign()
 %right UMINUS 
 %left '+' '-'
 %left '*' '/' 
-%type<str> assignment assignment1 consttype '=' '+' '-' '*' '/' E T F 
+%type<str> assignment assignment1 consttype E T F 
 %type<ival> Type
 %union {
 		int ival;
@@ -178,7 +178,7 @@ start : Function start
 	| 
 	;
 
-Function : Type ID '('')'  CompoundStmt {
+Function : Type ID '(' ')'  CompoundStmt {
 	if(strcmp($2,"main")!=0)
 	{
 		printf("goto F%d\n",lnum1);
@@ -188,7 +188,7 @@ Function : Type ID '('')'  CompoundStmt {
 		printf("\nError : Type mismatch : Line %d\n",printline());
 	}
 
-	if (!(strcmp($2,"printf") && strcmp($2,"scanf") && strcmp($2,"getc") && strcmp($2,"gets") && strcmp($2,"getchar") && strcmp	($2,"puts") && strcmp($2,"putchar") && strcmp($2,"clearerr") && strcmp($2,"getw") && strcmp($2,"putw") && strcmp($2,"putc") && strcmp($2,"rewind") && strcmp($2,"sprint") && strcmp($2,"sscanf") && strcmp($2,"remove") && strcmp($2,"fflush"))) 
+	if (!(strcmp($2,"printf") && strcmp($2,"scanf") && strcmp($2,"getc") && strcmp($2,"gets") && strcmp($2,"getchar") && strcmp($2,"puts") && strcmp($2,"putchar") && strcmp($2,"clearerr") && strcmp($2,"getw") && strcmp($2,"putw") && strcmp($2,"putc") && strcmp($2,"rewind") && strcmp($2,"sprint") && strcmp($2,"sscanf") && strcmp($2,"remove") && strcmp($2,"fflush"))) 
 		printf("Error : Type mismatch in redeclaration of %s : Line %d\n",$2,printline()); 
 	else 
 	{ 
@@ -377,7 +377,6 @@ F : '(' E ')' {$$=$2;}
 
 #include "lex.yy.c"
 #include<ctype.h>
-
 
 int main(int argc, char *argv[])
 {
